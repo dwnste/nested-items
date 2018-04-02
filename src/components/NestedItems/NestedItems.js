@@ -28,6 +28,7 @@ export default class NestedItems extends Component {
                 items={item.items}
                 key={item.guid}
                 guid={item.guid}
+                index={index}
                 onChange={(value) => this.handleChanges(value, index)}
             />) }
         </div>

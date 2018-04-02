@@ -16,9 +16,9 @@ export default class Item extends Component {
 
     onItemChange(index, changedItem) {
         const items = this.props.items.slice(0, index);
-
+        
         if (changedItem) {
-           items.push(changedItem);
+            items.push(changedItem);
         }
 
         items.push(...this.props.items.slice(index + 1));
@@ -53,7 +53,7 @@ export default class Item extends Component {
                         e.preventDefault();
                         e.stopPropagation();
                         this.setState({ showItems: true });
-                        this.props.onChange(createItem('new item'))}
+                        this.onItemChange(items.length, createItem('new item'))}
                     }
                 >
                     add
@@ -75,7 +75,6 @@ export default class Item extends Component {
                     items={item.items}
                     guid={item.guid}
                     key={item.guid}
-                    createItem={createItem}
                     onChange={(changedItem) => this.onItemChange(index, changedItem)}
                 />) }
             </div> : null }
