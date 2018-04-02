@@ -1,0 +1,6 @@
+.NestedItems {
+    display: block;
+    width: 250px;
+    height: 300px;
+    overflow: auto;
+}

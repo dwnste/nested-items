@@ -1,0 +1,23 @@
+.Item {
+    display: block;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.Item__logo-image {
+    width: 24px;
+    height: 24px;
+}
+
+.Item__list {
+    margin-left: 10px;
+    display: block;
+}
+
+.Item__element {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+}
