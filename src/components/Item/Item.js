@@ -24,9 +24,9 @@ export default class Item extends Component {
         items.push(...this.props.items.slice(index + 1));
 
         this.props.onChange({
-              name: this.props.name,
-              guid: this.props.guid,
-              items,
+            guid: this.props.guid,
+            name: this.props.name,
+            items,
         });
     }
 
@@ -49,13 +49,22 @@ export default class Item extends Component {
                 </div>
                 <button
                     className='Item__button'
-                    onClick={() => this.props.onChange(createItem('new item'))}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.setState({ showItems: true });
+                        this.props.onChange(createItem('new item'))}
+                    }
                 >
                     add
                 </button>
                 <button
                     className='Item__button'
-                    onClick={() => this.props.onChange(null)}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.props.onChange(null)}
+                    }
                 >
                     del
                 </button>

@@ -7,8 +7,18 @@ export default class NestedItems extends Component {
         items: this.props.items
     }
 
-    handleChanges = (value, guid) => {
-        console.log(value, guid);
+    handleChanges = (changedItem, index) => {
+        const items = this.state.items.slice(0, index);
+
+        if (changedItem) {
+           items.push(changedItem);
+        }
+
+        items.push(...this.state.items.slice(index + 1));
+
+        this.setState({
+            items
+        });
     }
 
     render() {
