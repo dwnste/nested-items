@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './Item.css';
 import logo from './folder.svg';
 
+import { createItem } from '../../helpers';
+
 export default class Item extends Component {
     state = {
         showItems: false
@@ -13,7 +15,7 @@ export default class Item extends Component {
     }
 
     onItemChange(index, changedItem) {
-        const items = [...this.props.items.slice(0, index)];
+        const items = this.props.items.slice(0, index);
 
         if (changedItem) {
            items.push(changedItem);
@@ -35,7 +37,6 @@ export default class Item extends Component {
             guid,
             items,
             onChange,
-            createItem
         } = this.props;
 
         return <div className='Item'>
@@ -54,7 +55,7 @@ export default class Item extends Component {
                 </button>
                 <button
                     className='Item__button'
-                    onClick={() => this.props.onChange(this.props.createItem(null))}
+                    onClick={() => this.props.onChange(null)}
                 >
                     del
                 </button>
@@ -64,7 +65,7 @@ export default class Item extends Component {
                     name={item.name}
                     items={item.items}
                     guid={item.guid}
-                    key={index}
+                    key={item.guid}
                     createItem={createItem}
                     onChange={(changedItem) => this.onItemChange(index, changedItem)}
                 />) }
