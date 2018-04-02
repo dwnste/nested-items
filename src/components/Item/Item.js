@@ -2,38 +2,14 @@ import React, { Component } from 'react';
 import './Item.css';
 import logo from './folder.svg';
 
-import { guid } from '../../helpers';
-
 export default class Item extends Component {
     state = {
-        showItems: false,
-        items: this.props.items
+        showItems: false
     }
 
     handleClick = (e) => {
         e.preventDefault();
         this.setState({ showItems: !this.state.showItems });
-    }
-
-    handleAddItem = (e, name = 'new item') => {
-        e.preventDefault();
-        e.stopPropagation();
-        this.setState({
-            items: [...this.state.items, {
-                name,
-                guid: guid(),
-                items: []
-            }],
-            showItems: true
-        });
-    }
-
-    handleDeleteItem = (e, guid) => {
-        e.preventDefault();
-        e.stopPropagation();
-        this.setState({
-            items: this.state.items.filter(item => item.guid !== guid)
-        });
     }
 
     render() {
@@ -49,7 +25,7 @@ export default class Item extends Component {
                 </div>
                 <button
                     className="Item__button"
-                    onClick={(e) => this.handleAddItem(e)}
+                    onClick={(e) => this.props.handleAddItem(e)}
                 >
                     add
                 </button>
@@ -61,12 +37,13 @@ export default class Item extends Component {
                 </button>
             </div>
             { this.state.showItems ? <div className="Item__list">
-                { this.state.items.map((item, index) => <Item
+                { this.props.items.map((item, index) => <Item
                     name={item.name}
                     items={item.items}
                     guid={item.guid}
                     key={index}
-                    handleDeleteItem={this.handleDeleteItem}
+                    handleAddItem={this.props.handleAddItem}
+                    handleDeleteItem={this.props.handleDeleteItem}
                 />) }
             </div> : null }
         </div>
