@@ -14,6 +14,15 @@
     display: block;
 }
 
+.Item__text {
+    display: block;
+    white-space: nowrap;
+}
+
+.Item__button {
+    margin-left: 5px;
+}
+
 .Item__element {
     cursor: pointer;
     display: flex;
