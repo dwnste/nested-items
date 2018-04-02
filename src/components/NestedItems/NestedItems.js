@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import './NestedItems.css';
 import Item from '../Item/Item';
 
+import { createItem } from '../../helpers';
+
 export default class NestedItems extends Component {
     state = {
-        items: this.props.items
+        items: this.props.items,
+        inputValue: '',
     }
 
     handleChanges = (changedItem, index) => {
@@ -17,8 +20,24 @@ export default class NestedItems extends Component {
         items.push(...this.state.items.slice(index + 1));
 
         this.setState({
-            items
+            items,
         });
+    }
+
+    addItem = (name = 'new item') => {
+        this.setState({
+            items: [
+                ...this.state.items,
+                createItem(name || 'new item'),
+            ]
+        })
+    }
+
+    handleInputChange = (event) => {
+        event.preventDefault();
+        this.setState({
+            inputValue: event.target.value,
+        })
     }
 
     render() {
@@ -31,6 +50,15 @@ export default class NestedItems extends Component {
                 index={index}
                 onChange={(value) => this.handleChanges(value, index)}
             />) }
+            <div className="NestedItems__tools">
+                <input
+                    type="text" 
+                    maxLength="16"
+                    onChange={this.handleInputChange}
+                    value={this.state.inputValue}
+                />
+                <button onClick={() => this.addItem(this.state.inputValue)}>add</button>
+            </div>
         </div>
     }
 }

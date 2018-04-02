@@ -34,7 +34,6 @@ export default class Item extends Component {
     render() {
         const {
             name,
-            guid,
             items,
             onChange,
         } = this.props;
@@ -63,7 +62,7 @@ export default class Item extends Component {
                     onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        this.props.onChange(null)}
+                        onChange(null)}
                     }
                 >
                     del
