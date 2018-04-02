@@ -49,7 +49,7 @@ export default class Item extends Component {
                 </div>
                 <button
                     className='Item__button'
-                    onClick={() => this.props.onChange(this.props.createItem('new item'))}
+                    onClick={() => this.props.onChange(createItem('new item'))}
                 >
                     add
                 </button>
