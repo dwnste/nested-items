@@ -9,25 +9,16 @@ export default class NestedItems extends Component {
         items: this.props.items
     }
 
-    handleAddItem = (e, name = 'new item') => {
-        e.preventDefault();
-        e.stopPropagation();
-        this.setState({
-            items: [...this.state.items, {
-                name,
-                guid: guid(),
-                items: []
-            }],
-            showItems: true
-        });
+    handleChanges = (value, guid) => {
+        console.log(value, guid);
     }
 
-    handleDeleteItem = (e, guid) => {
-        e.preventDefault();
-        e.stopPropagation();
-        this.setState({
-            items: this.state.items.filter(item => item.guid !== guid)
-        });
+    createItem = (name = 'new item') => {
+        return {
+            guid: guid(),
+            name,
+            items: []
+        }
     }
 
     render() {
@@ -37,8 +28,8 @@ export default class NestedItems extends Component {
                 items={item.items}
                 key={index}
                 guid={item.guid}
-                handleAddItem={this.handleAddItem}
-                handleDeleteItem={this.handleDeleteItem}
+                onChange={(value) => this.handleChanges(value, item.guid)}
+                createItem={this.createItem}
             />) }
         </div>
     }
