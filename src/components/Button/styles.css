@@ -1,0 +1,8 @@
+.Button {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.Button :hover {
+    opacity: 0.6;
+}

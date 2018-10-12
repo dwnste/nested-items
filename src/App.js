@@ -1,106 +1,62 @@
 import React, { Component } from 'react';
 import './App.css';
-import NestedItems from './components/NestedItems/NestedItems';
+import Item from './components/Item';
 
-import { guid } from './helpers';
+import nanoid from 'nanoid';
 
-const presetItems = [
-    {
-        guid: guid(),
-        name: 'someitem1',
-        items: [
-            {
-                guid: guid(),
-                name: 'somenesteditem1',
-                items: [
-                    {
-                        guid: guid(),
-                        name: 'somenesteditem3',
-                        items: [
-                            {
-                                guid: guid(),
-                                name: 'somenesteditem6',
-                                items: [
-                                    {
-                                        guid: guid(),
-                                        name: 'somenesteditem9',
-                                        items: [
-                                            {
-                                                guid: guid(),
-                                                name: 'somenesteditem13',
-                                                items: [
-                                                    {
-                                                        guid: guid(),
-                                                        name: 'somenesteditem14',
-                                                        items: []
-                                                    },
-                                                ]
-                                            },
-                                        ]
-                                    },
-                                    {
-                                        guid: guid(),
-                                        name: 'somenesteditem10',
-                                        items: []
-                                    },
-                                    {
-                                        guid: guid(),
-                                        name: 'somenesteditem11',
-                                        items: []
-                                    },
-                                ]
-                            },
-                            {
-                                guid: guid(),
-                                name: 'somenesteditem7',
-                                items: []
-                            },
-                            {
-                                guid: guid(),
-                                name: 'somenesteditem8',
-                                items: []
-                            },
-                        ]
-                    },
-                    {
-                        guid: guid(),
-                        name: 'somenesteditem4',
-                        items: []
-                    },
-                    {
-                        guid: guid(),
-                        name: 'somenesteditem5',
-                        items: []
-                    },
-                ]
-            },
-            {
-                guid: guid(),
-                name: 'somenesteditem2',
-                items: []
-            }
-        ]
-    },
-    {
-        guid: guid(),
-        name: 'someitem2',
-        items: []
-    },
-    {
-        guid: guid(),
-        name: 'someitem3',
-        items: []
-    }
-];
 
 class App extends Component {
+    state = {
+        items: [],
+    };
+
+    add = ({ name = 'New Item', items = [] }) => {
+        const newItem = this.createItem(name, items);
+
+        this.setState({ 
+            items: [...this.state.items, newItem],
+        });
+    };
+
+    remove = () => {
+        return false;
+    };
+
+    update = () => {
+        return false;
+    };
+
+    renderItems = items => items.map(props => <Item { ...props } />);
+
+    createItem = (name = 'New Item', items = []) => {
+        const guid = nanoid();
+
+        return {
+            name,
+            add: this.add,
+            remove: this.remove,
+            items,
+            key: guid,
+            renderItems: this.renderItems,
+        };
+    };
+
     render() {
+        const { items } = this.state;
+        const itemsHtml = !!items.length && this.renderItems(items);
+
         return (
             <div className="App">
-                <NestedItems items={presetItems} />
+                <div
+                    onClick={ this.add }
+                    className="App__button"
+                >
+                    Add item
+                </div>
+                { itemsHtml }
             </div>
         );
-    }
+    };
 }
 
 export default App;

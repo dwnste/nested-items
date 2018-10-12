@@ -1,0 +1,38 @@
+.Item {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.Item:hover .Item__buttons {
+    display: flex;
+}
+
+.Item__logo {
+    width: 24px;
+    height: 24px;
+}
+
+.Item__info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.Item__list {
+    margin-left: 10px;
+    display: block;
+}
+
+.Item__title {
+    display: block;
+    white-space: nowrap;
+}
+
+.Item__buttons {
+    display: none;
+    flex-direction: row;
+    margin-left: 10px;
+}
